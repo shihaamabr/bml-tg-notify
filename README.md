@@ -17,6 +17,9 @@ OR take as much as time you want to use app but slow notifications.
 Understand how this works before proceeding. Your BML Username and Password will be saved in PLAIN TEXT! 
 Anyone who has access (or gains access) to your server or computer can read .env file and optain your BML login credentials! 
 
+### Limitations
+- At the moment this script can only check 1 account from personal profile.
+
 ### Setup
 ```
 git clone https://github.com/shihaamabr/bml-tg-notify.git
@@ -25,8 +28,7 @@ chmod +x bml-tg-notify.sh
 cp env.sample .env
 ```
 - Edit the contents of .env to your config with text editor of your choosing (`nano .env`)
-### How to get "BML_ACCOUNTID"
-<image>
+- How to obtain BML_ACCOUNTID
 - Optionally edit delay `echo XX > delay` where XX is the time in seconds you want to delay script run, 
 By default this is set to 160. Please note that if the XX value is less than a certain value
 your IP could blocked by CloudFlare for DoS attack.
