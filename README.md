@@ -22,7 +22,7 @@ Anyone who has access (or gains access) to your server or computer can read .env
 git clone https://github.com/shihaamabr/bml-tg-notify.git
 cd bml-tg-notify
 chmod +x bml-tg-notify.sh
-mv env.sample .env
+cp env.sample .env
 ```
 - Edit the contents of .env to your config with text editor of your choosing (`nano .env`)
 ### How to get "BML_ACCOUNTID"
