@@ -1,6 +1,6 @@
 # BML-TG-NOTIFY
 ## Push Notification BML Transcations to Telegram
-![demo-screenshot](demo-screenshot.jpg)
+![bml-notify-screenshot.jpg](bml-notify-screenshot.jpg)
 
 ### Requriements
 `curl` `jq`
