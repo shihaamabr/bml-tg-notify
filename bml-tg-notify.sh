@@ -18,8 +18,8 @@ then
 else # if login failed
 	echo 'Something went wrong..'
 	echo ""
-	echo '"Code: 20" means your account locked, Please set password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
-	echo '"Code: 2" means your username or password is in correct, Please check .env to see if theyre entered correctly'
+	echo '"Code: 2" means your username or password is incorrect, Please check .env to see if theyre entered correctly'
+	echo '"Code: 20" means your account is locked, Please reset password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
 	echo ""
 	echo Code: $LOGIN # show error code
 	echo 'Run "curl https://www.bankofmaldives.com.mv/" and see if you get "Error code 1020", if you do this means your IP blocked'
