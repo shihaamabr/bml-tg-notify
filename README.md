@@ -5,7 +5,7 @@
 ## Is it safe?
 - Probably, I will NOT take resposibilty to whatever you do with this script,
 Understand how this works before proceeding. Your BML Username and Password will be saved in PLAIN TEXT!
-Anyone who has access (or gains access) to your server or computer can read .env file and optain your BML login credentials!
+Anyone who has access (or gains access) to your server or computer can read .env file and obtain your BML login credentials!
 
 ## Limitations
 - At the moment this script can only check 1 account from personal profile.
@@ -33,9 +33,10 @@ cp env.sample .env
 - Optionally edit delay `echo XX > delay` where XX is the time in seconds you want to delay script run, 
 By default this is set to 160. Please note that if the XX value is less than a certain value
 your IP could blocked by CloudFlare for DoS attack.
+### Execute the script
 ```
 ./bml-tg-notify.sh
 ```
-
+- Maybe put in a screen to run in background?
 ## Bugs
 - You tell me :)
