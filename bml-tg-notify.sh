@@ -28,23 +28,26 @@ then
 	AMOUNT=$(echo $HISTORY | jq -r .amount | head -n1)
 	if [ "$DESCRIPTION" = "Transfer Credit" ]
 	then
-		FROMTO=From
+		FROMTOAT=From
 		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
 	elif [ "$DESCRIPTION" = "Transfer Debit" ]
 	then
-		FROMTO=To
+		FROMTOAT=To
+		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
+	elif [ "$DESCRIPTION" = "ATM Withdrawal" ]
+		FROMTOAT=At
 		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
 	elif [ "$DESCRIPTION" = "Salary" ]
 	then
-		FROMTO=From
+		FROMTOAT=From
 		ENTITY=$(echo $HISTORY | jq -r .narrative2 | head -n1)
 	fi
 	echo $DESCRIPTION
-	echo $FROMTO: $ENTITY
+	echo $FROMTOAT: $ENTITY
 	echo $CURRENCY: $AMOUNT
 	DESCRIPTION=`echo $DESCRIPTION | sed "s/ /%20/g"` #Fix spaces
 	ENTITY=`echo $ENTITY | sed "s/ /%20/g"` #Fix spaces
-	TGTEXT=$(echo $DESCRIPTION%0A$FROMTO:%20$ENTITY%0A$CURRENCY:%20$AMOUNT)
+	TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT)
 	curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT > /dev/null
 	echo "Next check in $DELAY seconds"
 else
