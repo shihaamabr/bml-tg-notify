@@ -41,4 +41,4 @@ your IP could get blocked by CloudFlare for DoS attack.
 ```
 - Maybe put in a screen to run in background?
 ## Bugs
-- You tell me :)
+- [You tell me :)](https://github.com/shihaamabr/bml-tg-notify/issues/new)
