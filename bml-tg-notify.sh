@@ -55,9 +55,7 @@ then
 	echo $DESCRIPTION
 	echo $FROMTOAT: $ENTITY
 	echo $CURRENCY: $AMOUNT
-	DESCRIPTION=`echo $DESCRIPTION | sed "s/ /%20/g"` # Fix spaces for curl
-	ENTITY=`echo $ENTITY | sed "s/ /%20/g"` # Fix spaces curl
-	TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT) # format text for telegram
+	TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT | sed "s/ /%20/g") # format text for telegram
 	curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT > /dev/null #send to telegram
 	echo "Next check in $DELAY seconds"
 else
