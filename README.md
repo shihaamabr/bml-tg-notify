@@ -2,9 +2,6 @@
 ## Push Notification BML Transcations to Telegram
 ![bml-notify-screenshot.jpg](bml-notify-screenshot.jpg)
 
-### Requriements
-`curl` `jq`
-- Install with whatever package manager you use.
 
 ### There's catch! 
 - BML do NOT allow you to be logged in more than 1 device at a time, 
@@ -21,7 +18,12 @@ Anyone who has access (or gains access) to your server or computer can read .env
 ### Limitations
 - At the moment this script can only check 1 account from personal profile.
 
-### Setup
+## Setup 
+### Requriements
+`curl` `jq`
+- Install with whatever package manager you use.
+- Make SURE they are installed before continuing!
+### Download cript and config
 ```
 git clone https://github.com/shihaamabr/bml-tg-notify.git
 cd bml-tg-notify
