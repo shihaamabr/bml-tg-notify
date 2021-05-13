@@ -23,7 +23,7 @@ Anyone who has access (or gains access) to your server or computer can read .env
 `curl` `jq`
 - Install with whatever package manager you use.
 - Make SURE they are installed before continuing!
-### Download cript and config
+### Download script and config
 ```
 git clone https://github.com/shihaamabr/bml-tg-notify.git
 cd bml-tg-notify
