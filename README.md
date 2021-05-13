@@ -28,7 +28,7 @@ chmod +x bml-tg-notify.sh
 cp env.sample .env
 ```
 - Edit the contents of .env to your config with text editor of your choosing (`nano .env`)\
-<a href=https://raw.githubusercontent.com/shihaamabr/bml-tg-notify/main/how-to-get-BML_ACCOUNTID.png" target="_blank">How to obtain BML_ACCOUNTID</a>
+[How to obtain BML_ACCOUNTID](https://raw.githubusercontent.com/shihaamabr/bml-tg-notify/main/how-to-get-BML_ACCOUNTID.png)
 - Optionally edit delay `echo XX > delay` where XX is the time in seconds you want to delay script run, 
 By default this is set to 160. Please note that if the XX value is less than a certain value
 your IP could blocked by CloudFlare for DoS attack.
