@@ -9,6 +9,8 @@ Anyone who has access (or gains access) to your server or computer can read .env
 
 ## Limitations
 - At the moment this script can only check 1 account from personal profile.
+- Script ONLY sends notification for last transaction, so if there more than 1 transacation when script runs, 
+you will get notification for the last one only.
 ### There's catch!
 - BML do NOT allow you to be logged in more than 1 device at a time,
 So when this script runs and if you were using Mobile App or Website you will be logged out!
