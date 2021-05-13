@@ -5,6 +5,11 @@ TG_BOTAPI='https://api.telegram.org/bot'
 BML_URL='https://www.bankofmaldives.com.mv/internetbanking/api'
 COOKIE=~/.cache/bml-cli/cookie
 
+if [ ! -f delay ]
+then
+	echo 160 > delay
+fi
+
 while true; do
 LOGIN=$(curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --data-raw password=${BML_PASSWORD} | jq -r .code)
 if [ "$LOGIN" = "0" ]
