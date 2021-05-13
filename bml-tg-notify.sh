@@ -1,6 +1,5 @@
 #!/bin/bash
-source .env # import credentials
-mkdir -p ~/.cache/bml-cli/ # make cookie dir
+source .env # import credentials, tg api, cookie path, bml api
 
 if [ ! -f delay ] # if delay file missing
 then
@@ -9,7 +8,7 @@ fi
 
 while true; do
 
-LOGIN=$(curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --data-raw password=${BML_PASSWORD} | jq -r .code) ## attempt to login
+LOGIN=$(curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --data-raw password=${BML_PASSWORD} | jq -r .code) # attempt to login and generate cookie
 
 if [ "$LOGIN" = "0" ] # if Login success
 then
