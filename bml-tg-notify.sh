@@ -40,6 +40,7 @@ then
 		FROMTOAT=To
 		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
 	elif [ "$DESCRIPTION" = "ATM Withdrawal" ]
+	then
 		FROMTOAT=At
 		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
 	elif [ "$DESCRIPTION" = "Salary" ]
