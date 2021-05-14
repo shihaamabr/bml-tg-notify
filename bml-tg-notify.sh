@@ -36,7 +36,7 @@ then
 	TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
 	curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
 	echo  "Next check in $DELAY seconds"
-	unset DESCRIPTION ; AMOUNT ; unset FROMTOAT ; unset ENTITY ; unset TGTEXT
+	unset DESCRIPTION ; unset AMOUNT ; unset FROMTOAT ; unset ENTITY ; unset TGTEXT
 else
 
 	echo "nothing new..checking again in $DELAY seconds"
