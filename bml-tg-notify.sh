@@ -1,13 +1,10 @@
 #!/bin/bash
 source .env # import credentials, tg api, cookie path, bml api
-
 if [ ! -f delay ] # if delay file missing
 then
 	echo 160 > delay # make delay file with 160 sec
 fi
-
 while true; do
-
 curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --data-raw password=${BML_PASSWORD}  # attempt to login and generate cookie
 PROFILE=$(curl -s -b $COOKIE $BML_URL/profile | jq -r '.payload | .profile | .[] | .profile' | head -n 1) ; echo $PROFILE # get Personal Profile
 curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE  # select Personal Profile
@@ -43,7 +40,5 @@ else
 
 	echo "nothing new..checking again in $DELAY seconds"
 fi
-
 sleep $DELAY # initiate delay read from delay file
-
 done
