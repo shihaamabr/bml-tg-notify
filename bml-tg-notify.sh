@@ -18,21 +18,26 @@ elif [ "$LOGIN" = "2" ]
 then
 	echo 'Your username or password is incorrect.'
 	echo 'Please check .env to see if theyre entered correctly.'
+	:
 elif [ "$LOGIN" = "20" ]
 then
 	echo 'Your account is locked!'
 	echo 'Reset password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
+	:
 elif ["$LOGIN" = ""]
 then
 	if [ $(curl-s https://www.bankofmaldives.com.mv/) = "error code: 1020" ]
 	then
 		echo "Your IP is blocked from CF for DoS attack"
 		echo "Increase delay and try again later"
+		:
 	else
 		:
 	fi
 else
 	echo 'Something went wrong..'
+	echo 'exiting..'
+	exit
 fi
 
 CHECKDIFF1=$(echo $HISTORY | wc -c) # check intial and previous history
