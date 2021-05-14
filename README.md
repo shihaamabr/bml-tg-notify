@@ -3,8 +3,8 @@
 ![bml-notify-screenshot.jpg](bml-notify-screenshot.jpg)
 
 ## Is it safe?
-- Probably, I will NOT take resposibilty to whatever you do with this script,
-Understand how this works before proceeding. Your BML Username and Password will be saved in PLAIN TEXT!
+- Probably, I will NOT take resposibilty to whatever you do with this script. [See More](LICENSE)
+- Your BML Username and Password will be saved in PLAIN TEXT!
 Anyone who has access (or gains access) to your server or computer can read .env file and obtain your BML login credentials!
 
 ## Limitations
@@ -14,7 +14,7 @@ when script checks for new transactions you will get notification for the last o
 ### There's catch!
 - BML do NOT allow you to be logged in more than 1 session at a time,
 so when this script runs and if you were using mobile app or website you will be logged out!
-You either get fast notification but with less time to use app 
+- You either get fast notification but with less time to use app 
 OR take as much as time you want to use app but slow notifications.
 Which is why I have added a delay to change how often script logs into account,
 This can be delay can be configured later.
