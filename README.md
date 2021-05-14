@@ -39,6 +39,7 @@ cp env.sample .env
 ```
 - Maybe run in a screen to run in background?
 ## Setting Delay - Optional
+- [See why](#theres-catch)
 `echo XX > delay` where XX is the time in seconds you want to delay script logs into account
 ### Notes
 - Default value is 160.
