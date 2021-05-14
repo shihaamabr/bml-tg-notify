@@ -50,7 +50,7 @@ then
 	elif [ "$DESCRIPTION" = "Purchase" ]
 	then
 		FROMTOAT=At
-		ENTITI=$(echo $HISTORY | jq -r .narrative3 | head -n1)
+		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1)
 	elif [ "$DESCRIPTION" = "Salary" ] # if last trascation descripton is Salary
 	then
 		FROMTOAT=From
