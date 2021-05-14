@@ -26,7 +26,7 @@ then
 	:
 elif ["$LOGIN" = ""]
 then
-	if [ $(curl-s https://www.bankofmaldives.com.mv/) = "error code: 1020" ]
+	if [ $(curl -s https://www.bankofmaldives.com.mv/) = "error code: 1020" ]
 	then
 		echo "Your IP is blocked from CF for DoS attack"
 		echo "Increase delay and try again later"
