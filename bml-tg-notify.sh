@@ -14,16 +14,25 @@ if [ "$LOGIN" = "0" ] # if Login success
 then
 	PROFILE=$(curl -s -b $COOKIE $BML_URL/profile | jq -r '.payload | .profile | .[] | .profile' | head -n 1) # get Personal Profile
 	curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE > /dev/null # select Personal Profile
-else # if login failed
+elif [ "$LOGIN" = "2" ]
+then
+	echo 'Your username or password is incorrect.'
+	echo 'Please check .env to see if theyre entered correctly.'
+elif [ "$LOGIN" = "20" ]
+then
+	echo 'Your account is locked!'
+	echo 'Reset password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
+elif ["$LOGIN" = ""]
+then
+	if [ $(curl-s https://www.bankofmaldives.com.mv/) = "error code: 1020" ]
+	then
+		echo "Your IP is blocked from CF for DoS attack"
+		echo "Increase delay and try again later"
+	else
+		:
+	fi
+else
 	echo 'Something went wrong..'
-	echo ""
-	echo '"Code: 2" means your username or password is incorrect, Please check .env to see if theyre entered correctly'
-	echo '"Code: 20" means your account is locked, Please reset password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
-	echo ""
-	echo Code: $LOGIN # show error code
-	echo 'Run "curl https://www.bankofmaldives.com.mv/" and see if you get "Error code 1020", if you do this means your IP blocked'
-	echo 'exiting...'
-	exit # close
 fi
 
 CHECKDIFF1=$(echo $HISTORY | wc -c) # check intial and previous history
