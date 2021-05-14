@@ -13,7 +13,7 @@ LOGIN=$(curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --da
 if [ "$LOGIN" = "0" ] # if Login success
 then
 	PROFILE=$(curl -s -b $COOKIE $BML_URL/profile | jq -r '.payload | .profile | .[] | .profile' | head -n 1) # get Personal Profile
-	curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE > /dev/null # select Personal Profile
+	NONEED=$(curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE) # select Personal Profile
 elif [ "$LOGIN" = "2" ]
 then
 	echo 'Your username or password is incorrect.'
