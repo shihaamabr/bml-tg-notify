@@ -39,8 +39,7 @@ cp env.sample .env
 ```
 - Maybe run in a screen to run in background?
 ## Setting Delay - Optional
-- [See why](#theres-catch)
-- In a different terminal seession run `echo XX > delay` where XX is the time in seconds you want to delay script logs into account
+In a different terminal seession run `echo XX > delay` where XX is the time in seconds you want to delay script logs into account [See why](#theres-catch)
 ### Notes
 - Default value is 160.
 - If the XX value is less than a certain value (I think 15) your IP could get blocked by CloudFlare for DoS attack.
