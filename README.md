@@ -9,8 +9,8 @@ Anyone who has access (or gains access) to your server or computer can read .env
 
 ## Limitations
 - At the moment this script can only check 1 account from personal profile.
-- Script ONLY sends notification for last transaction, so if there more than 1 transacation when script runs, 
-you will get notification for the last one only.
+- Script ONLY sends notification for last transaction, so if there more than 1 transacation 
+when script checks for new transactionsyou will get notification for the last one only.
 ### There's catch!
 - BML do NOT allow you to be logged in more than 1 session at a time,
 so when this script runs and if you were using mobile app or website you will be logged out!
@@ -38,10 +38,12 @@ cp env.sample .env
 ./bml-tg-notify.sh
 ```
 - Maybe run in a screen to run in background?
-### Setting Delay - Optional
-- By default delay is set to 160 seconds
-- In a new terminal run `echo XX > delay` where XX is the time in seconds you want to delay script logs into account.
-- Please note that if the XX value is less than a certain value (I think 15) your IP could get blocked by CloudFlare for DoS attack.
+## Setting Delay - Optional
+`echo XX > delay` where XX is the time in seconds you want to delay script logs into account
+### Notes
+- Default value is 160.
+- If the XX value is less than a certain value (I think 15) your IP could get blocked by CloudFlare for DoS attack.
 - You do not need to restart script after changing delay.
+
 ## Bugs
 - [You tell me :)](https://github.com/shihaamabr/bml-tg-notify/issues/new)
