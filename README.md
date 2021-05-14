@@ -12,11 +12,12 @@ Anyone who has access (or gains access) to your server or computer can read .env
 - Script ONLY sends notification for last transaction, so if there more than 1 transacation when script runs, 
 you will get notification for the last one only.
 ### There's catch!
-- BML do NOT allow you to be logged in more than 1 device at a time,
-So when this script runs and if you were using Mobile App or Website you will be logged out!
-Which is why I have added a delay to change how often script logs into account and check for new transactions,
-This can be delay can be configured later. You either get fast notification but with less time to use app to do whatever you do
+- BML do NOT allow you to be logged in more than 1 session at a time,
+so when this script runs and if you were using mobile app or website you will be logged out!
+You either get fast notification but with less time to use app 
 OR take as much as time you want to use app but slow notifications.
+Which is why I have added a delay to change how often script logs into account,
+This can be delay can be configured later.
 
 ## Getting started. 
 ### Requriements
@@ -37,10 +38,10 @@ cp env.sample .env
 ./bml-tg-notify.sh
 ```
 - Maybe run in a screen to run in background?
-## Setting Delay - Optional
-- `echo XX > delay` where XX is the time in seconds you want to delay script runs,
-By default this is set to 160. Please note that if the XX value is less than a certain value (I think 15)
-your IP could get blocked by CloudFlare for DoS attack.
+### Setting Delay - Optional
+- By default delay is set to 160.
+- In a new terminal run `echo XX > delay` where XX is the time in seconds you want to delay script runs,
+- Please note that if the XX value is less than a certain value (I think 15) your IP could get blocked by CloudFlare for DoS attack.
 - You do not need to restart script after changing delay.
 ## Bugs
 - [You tell me :)](https://github.com/shihaamabr/bml-tg-notify/issues/new)
