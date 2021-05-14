@@ -39,8 +39,8 @@ cp env.sample .env
 ```
 - Maybe run in a screen to run in background?
 ### Setting Delay - Optional
-- By default delay is set to 160.
-- In a new terminal run `echo XX > delay` where XX is the time in seconds you want to delay script runs,
+- By default delay is set to 160 seconds
+- In a new terminal run `echo XX > delay` where XX is the time in seconds you want to delay script logs into account.
 - Please note that if the XX value is less than a certain value (I think 15) your IP could get blocked by CloudFlare for DoS attack.
 - You do not need to restart script after changing delay.
 ## Bugs
