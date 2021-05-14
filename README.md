@@ -17,7 +17,7 @@ so when this script runs and if you were using mobile app or website you will be
 - You either get fast notification but with less time to use app 
 OR take as much as time you want to use app but slow notifications.
 Which is why I have added a delay to change how often script logs into account,
-This can be delay can be configured later.
+This can be delay can be configured later. [See how](#setting-delay---optional)
 
 ## Getting started. 
 ### Requriements
@@ -39,7 +39,7 @@ cp env.sample .env
 ```
 - Maybe run in a screen to run in background?
 ## Setting Delay - Optional
-- [See why](#theres-catch)
+- [See why](#theres-catch)\
 `echo XX > delay` where XX is the time in seconds you want to delay script logs into account
 ### Notes
 - Default value is 160.
