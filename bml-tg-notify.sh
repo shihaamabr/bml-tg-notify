@@ -24,7 +24,7 @@ then
 	echo 'Your account is locked!'
 	echo 'Reset password from "https://www.bankofmaldives.com.mv/internetbanking/forgot_password"'
 	:
-elif ["$LOGIN" = ""]
+elif [ "$LOGIN" = "" ]
 then
 	if [ $(curl -s https://www.bankofmaldives.com.mv/) = "error code: 1020" ]
 	then
