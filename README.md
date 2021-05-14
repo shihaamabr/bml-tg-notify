@@ -30,7 +30,7 @@ cd bml-tg-notify
 chmod +x bml-tg-notify.sh
 cp env.sample .env
 ```
-- Edit the contents of .env to your config (`nano .env`)\
+- Edit the contents of .env to your config (`nano .env`)
 - [How to obtain BML_ACCOUNTID](https://raw.githubusercontent.com/shihaamabr/bml-tg-notify/main/how-to-obtain-BML_ACCOUNTID.png)
 ### Execute the script
 ```
