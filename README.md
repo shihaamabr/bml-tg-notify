@@ -24,7 +24,7 @@ This can be delay can be configured later. [See how](#setting-delay---optional)
 `curl` `jq`
 - Install with whatever package manager you use.
 - Make SURE they are installed before continuing!
-### Download script and config
+### Clone repo and Configure
 ```
 git clone https://github.com/shihaamabr/bml-tg-notify.git
 cd bml-tg-notify
@@ -38,7 +38,7 @@ cp env.sample .env
 ./bml-tg-notify.sh
 ```
 - Maybe run in a screen to run in background?
-## Setting Delay - Optional
+## Setting Delay - Optional Configration
 In a different terminal seession run `echo XX > delay` where XX is the time in seconds you want to delay script logs into account [See why](#theres-catch)
 ### Notes
 - Default value is 160.
