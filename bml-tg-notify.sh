@@ -17,7 +17,7 @@ then
 	if [ "$CHECKDIFF2" = "1" ]
 	then
 		echo "=============" ; echo NEW DAY ; echo "============="
-		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP,%20ITS%0000
+		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP%0AITS%0000
 	else
 		echo $HISTORY | jq
 		DESCRIPTION=$(echo $HISTORY | jq -r .description | head -n1) ; echo $DESCRIPTION # get last trascation description
@@ -39,7 +39,7 @@ then
 			FROMTOAT=From
 			ENTITY=$(echo $HISTORY | jq -r .narrative2 | head -n1) ; echo $ENTITY # get last trascation company name
 		fi
-		TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
+		TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT: $ENTITY%0A$CURRENCY: $AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
 		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
 		echo  "Next check in $DELAY seconds"
 		unset DESCRIPTION ; unset AMOUNT ; unset FROMTOAT ; unset ENTITY ; unset TGTEXT
