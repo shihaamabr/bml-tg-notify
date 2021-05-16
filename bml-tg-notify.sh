@@ -14,29 +14,36 @@ CHECKDIFF2=$(echo $HISTORY | wc -c) ; echo $CHECKDIFF2 # check new history
 DELAY=$(cat delay) ; echo $DELAY # read delay file and get value
 if [ "$CHECKDIFF1" != "$CHECKDIFF2" ] # if previous history do not match with new history
 then
-	DESCRIPTION=$(echo $HISTORY | jq -r .description | head -n1) ; echo $DESCRIPTION # get last trascation description
-	AMOUNT=$(echo $HISTORY | jq -r .amount | head -n1) ; echo $AMOUNT # get last trascation amount
-	if [ "$DESCRIPTION" = "Transfer Credit" ] # if last trascation is description is Transfer Credit
+	if [ "$CHECKDIFF2" = "1" ]
 	then
-		FROMTOAT=From
-		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get last persona or place name
-	elif [ "$DESCRIPTION" = "Transfer Debit" ] # if last trascation descripton is Transfer Debit
-	then
-		FROMTOAT=To
-		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get last person or place name
-	elif [ "$DESCRIPTION" = "ATM Withdrawal" ] || [ "$DESCRIPTION" = "Purchase" ] # if last trascation descripton is ATM Withdrawal
-	then
-		FROMTOAT=At
-		ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY #get last ATM name
-	elif [ "$DESCRIPTION" = "Salary" ] # if last trascation descripton is Salary
-	then
-		FROMTOAT=From
-		ENTITY=$(echo $HISTORY | jq -r .narrative2 | head -n1) ; echo $ENTITY # get last trascation company name
+		echo "=============" ; echo NEW DAY ; echo "============="
+		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP,%20ITS%0000
+	else
+		echo $HISTORY | jq
+		DESCRIPTION=$(echo $HISTORY | jq -r .description | head -n1) ; echo $DESCRIPTION # get last trascation description
+		AMOUNT=$(echo $HISTORY | jq -r .amount | head -n1) ; echo $AMOUNT # get last trascation amount
+		if [ "$DESCRIPTION" = "Transfer Credit" ] # if last trascation is description is Transfer Credit
+		then
+			FROMTOAT=From
+			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get last persona or place name
+		elif [ "$DESCRIPTION" = "Transfer Debit" ] # if last trascation descripton is Transfer Debit
+		then
+			FROMTOAT=To
+			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get last person or place name
+		elif [ "$DESCRIPTION" = "ATM Withdrawal" ] || [ "$DESCRIPTION" = "Purchase" ] # if last trascation descripton is ATM Withdrawal
+		then
+			FROMTOAT=At
+			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY #get last ATM name
+		elif [ "$DESCRIPTION" = "Salary" ] # if last trascation descripton is Salary
+		then
+			FROMTOAT=From
+			ENTITY=$(echo $HISTORY | jq -r .narrative2 | head -n1) ; echo $ENTITY # get last trascation company name
+		fi
+		TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
+		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
+		echo  "Next check in $DELAY seconds"
+		unset DESCRIPTION ; unset AMOUNT ; unset FROMTOAT ; unset ENTITY ; unset TGTEXT
 	fi
-	TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT:%20$ENTITY%0A$CURRENCY:%20$AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
-	curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
-	echo  "Next check in $DELAY seconds"
-	unset DESCRIPTION ; unset AMOUNT ; unset FROMTOAT ; unset ENTITY ; unset TGTEXT
 else
 
 	echo "nothing new..checking again in $DELAY seconds"
