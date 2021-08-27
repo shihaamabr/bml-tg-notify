@@ -76,7 +76,7 @@ then
 		then
 			FROMTOAT=To
 			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get last person or place name
-		elif [ "$DESCRIPTION" = "Cash Deposit-ATM" ] [ "$DESCRIPTION" = "ATM Withdrawal" ] || [ "$DESCRIPTION" = "Purchase" ] # if last trascation descripton is ATM Withdrawal
+		elif [ "$DESCRIPTION" = "Cash Deposit-ATM" ] || [ "$DESCRIPTION" = "ATM Withdrawal" ] || [ "$DESCRIPTION" = "Purchase" ] # if last trascation descripton is ATM Withdrawal
 		then
 			FROMTOAT=At
 			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY #get last ATM name
