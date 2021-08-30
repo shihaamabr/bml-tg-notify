@@ -63,7 +63,7 @@ then
 	if [ "$CHECKDIFF2" = "1" ]
 	then
 		echo "=============" ; echo NEW DAY ; echo "============="
-		curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP%0AITS%0000
+		# curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP%0AITS%0000
 	else
 		echo $HISTORY | jq
 		DESCRIPTION=$(echo $HISTORY | jq -r .description | head -n1) ; echo $DESCRIPTION # get last trascation description
