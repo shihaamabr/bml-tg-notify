@@ -15,6 +15,13 @@ PROFILE=$(curl -s -b $COOKIE $BML_URL/profile | jq -r '.payload | .profile | .[]
 curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE  # select Personal Profile
 }
 
+getaccountdetails(){
+REQACCOUNTDETAILS=$(curl -s -b $COOKIE $BML_URL/account/$BML_ACCOUNTID | jq -r .payload)
+ACCOUNTTYPE=$(echo $REQACCOUNTDETAILS | jq -r .product)
+ACCOUNTNUMBER=$(echo $REQACCOUNTDETAILS | jq -r .accountNumber)
+CURRENCY=$(echo $REQACCOUNTDETAILS | jq -r .currency)
+}
+
 send_tg(){
 TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT: $ENTITY%0A$CURRENCY: $AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
 curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
@@ -43,7 +50,7 @@ echo  "Nothing new....Next check in $DELAY seconds"
 
 init
 login
-
+getaccountdetails
 loop(){
 while true; do
 
