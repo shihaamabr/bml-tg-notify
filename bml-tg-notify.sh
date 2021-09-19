@@ -1,14 +1,6 @@
 #!/bin/bash
 source .env # import credentials, tg api, cookie path, bml api
 
-
-init(){
-if [ ! -f delay ] # if delay file missing
-then
-	echo 160 > delay # make delay file with 160 sec
-fi
-}
-
 login(){
 echo ""
 echo ""
@@ -72,7 +64,7 @@ CHECKDIFF2=$(echo $HISTORY | wc -c) ; echo $CHECKDIFF2 # check new history
 }
 
 read_delay(){
-DELAY=$(cat delay) ; echo $DELAY # read delay file and get value
+DELAY=$(cat delay) ; echo $NORMAL_DELAY # read delay file and get value
 }
 
 
@@ -139,7 +131,7 @@ then
 		send_tg
 	fi
 else
-	echo  "Nothing new....Next check in $DELAY seconds"
+	echo  "Nothing new....Next check in $NORMAL_DELAY seconds"
 fi
 done
 }
@@ -147,7 +139,7 @@ done
 infinite_loop(){
 while true; do
 	loop
-	sleep $DELAY # initiate delay read from delay file
+	sleep $NORMAL_DELAY
 done
 }
 infinite_loop
