@@ -58,6 +58,8 @@ req_history
 
 if [ "$LOGIN_STATUS" != "true" ]
 then
+	echo "Looks like app or web was opened... checking again in $APP_OPEN_DELAY"
+	sleep $APP_OPEN_DELAY
 	login
 	break & loop
 fi
