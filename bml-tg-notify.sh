@@ -10,9 +10,26 @@ fi
 }
 
 login(){
+echo ""
+echo ""
+echo ===========
+echo LOGGING IN
 curl -s -c $COOKIE $BML_URL/login --data-raw username=$BML_USERNAME --data-raw password=${BML_PASSWORD}  # attempt to login and generate cookie
+echo ""
+echo ""
+echo ===========
+echo SELECTING PROFILE
 PROFILE=$(curl -s -b $COOKIE $BML_URL/profile | jq -r '.payload | .profile | .[] | .profile' | head -n 1) ; echo $PROFILE # get Personal Profile
 curl -s -b $COOKIE $BML_URL/profile --data-raw profile=$PROFILE  # select Personal Profile
+echo ""
+echo ""
+}
+
+getnumberofaccounts(){
+NUMBEROFACCOUNTS=$(cat .env | grep BML_ACCOUNTID | cut --complement -d "'" -f 1 |  cut -f1 -d "'" | wc -l)
+NUMBEROFACCOUNTS=$(expr $NUMBEROFACCOUNTS - 1)
+echo ""
+echo $NUMBEROFACCOUNTS Accounts loaded
 }
 
 getaccountdetails(){
@@ -23,14 +40,28 @@ CURRENCY=$(echo $REQACCOUNTDETAILS | jq -r .currency)
 }
 
 send_tg(){
-TGTEXT=$(echo $DESCRIPTION%0A$FROMTOAT: $ENTITY%0A$CURRENCY: $AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
+TGTEXT=$(echo $ACCOUNTTYPE%0A$ACCOUNTNUMBER%0A%0A$DESCRIPTION%0A$FROMTOAT: $ENTITY%0A$CURRENCY: $AMOUNT | sed "s/ /%20/g") ; echo $TGTEXT # format text for telegram
+echo ""
+echo ""
+echo SENDING TO TG
+
 curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=$TGTEXT  #send to telegram
-echo  "Next check in $DELAY seconds"
+echo ""
+echo ""
+
 }
 
 req_history(){
+echo ""
+echo ""
+echo ===========
+echo Requesting History for: $BML_ACCOUNTID
 REQ_HISTORY=$(curl -s -b $COOKIE $BML_URL/account/$BML_ACCOUNTID/history/today) ; echo $REQ_HISTORY
-LOGIN_STATUS=$(echo $REQ_HISTORY | jq -r .success) ; echo $LOGIN_STATUS
+#LOGIN_STATUS=$(echo $REQ_HISTORY | jq -r .success) ; echo $LOGIN_STATUS
+echo ""
+echo ""
+echo ===========
+
 }
 
 check_diff(){
@@ -44,26 +75,33 @@ read_delay(){
 DELAY=$(cat delay) ; echo $DELAY # read delay file and get value
 }
 
-echo_delay(){
-echo  "Nothing new....Next check in $DELAY seconds"
-}
 
 init
 login
-getaccountdetails
 loop(){
-while true; do
+i=0
+#	if [ "$LOGIN_STATUS" != "true" ]
+#	then
+#		echo ""
+#		echo ""
+#		echo " LOGGED OUT - SLEEPING
+#		sleep 200
+#	        login
+#	        infinite_loop
+#	fi
 
-req_history
-
-if [ "$LOGIN_STATUS" != "true" ]
-then
-	login
-	break & loop
-fi
-
-check_diff
-read_delay
+	for account in `cat .env | grep BML_ACCOUNTID | cut --complement -d "'" -f 1 |  cut -f1 -d "'"`
+	do
+        	accountid[$i]=$account;
+		i=$(($i+1));
+		BML_ACCOUNTID=$(cat .env | grep BML_ACCOUNTID | cut --complement -d "'" -f 1 |  cut -f1 -d "'" | head -n$i | tail -n1)
+		echo ""
+		echo $BML_ACCOUNTID Selected
+		echo ""
+		getaccountdetails
+		req_history
+		check_diff
+		read_delay
 
 if [ "$CHECKDIFF1" != "$CHECKDIFF2" ] # if previous history do not match with new history
 then
@@ -72,7 +110,13 @@ then
 		echo "=============" ; echo NEW DAY ; echo "============="
 		# curl -s $TG_BOTAPI$TG_BOT_TOKEN/sendMessage?chat_id=$TG_CHATID'&'text=GO%20TO%20SLEEP%0AITS%0000
 	else
+		echo ""
+		echo ""
+		echo ==============
+		echo History of $ACCOUNTTYPE - $ACCOUNTNUMBER
 		echo $HISTORY | jq
+		echo ""
+		echo ""
 		DESCRIPTION=$(echo $HISTORY | jq -r .description | head -n1) ; echo $DESCRIPTION # get last trascation description
 		AMOUNT=$(echo $HISTORY | jq -r .amount | head -n1) ; echo $AMOUNT # get last trascation amount
 		if [ "$DESCRIPTION" = "Transfer Credit" ] # if last trascation is description is Transfer Credit
@@ -95,9 +139,15 @@ then
 		send_tg
 	fi
 else
-	echo_delay
+	echo  "Nothing new....Next check in $DELAY seconds"
 fi
-sleep $DELAY # initiate delay read from delay file
 done
 }
-loop
+
+infinite_loop(){
+while true; do
+	loop
+	sleep $DELAY # initiate delay read from delay file
+done
+}
+infinite_loop
