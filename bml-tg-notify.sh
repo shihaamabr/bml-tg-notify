@@ -93,6 +93,10 @@ then
 		then
 			FROMTOAT=From
 			ENTITY=$(echo $HISTORY | jq -r .narrative2 | head -n1) ; echo $ENTITY # get last trascation company name
+		elif [ "$DESCRIPTION" = "Prepaid Top-Up" ] # if last trascation descripton is Prepaid Top-Up
+		then
+			FROMTOAT=To
+			ENTITY=$(echo $HISTORY | jq -r .narrative3 | head -n1) ; echo $ENTITY # get name..idk
 		fi
 		send_tg
 	fi
